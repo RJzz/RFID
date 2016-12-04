@@ -16,7 +16,7 @@ public class SqlHelper {
     private ResultSetMetaData metaData = null;
 
     //链接数据库的属性
-    private String driver, url, userName, passWord;
+    private String driver, url;
     Properties properties = new Properties();
     //使用类加载器关联文件
     public SqlHelper() {
@@ -25,8 +25,6 @@ public class SqlHelper {
             properties.load(input);
             driver = properties.getProperty("driver");
             url = properties.getProperty("url");
-            userName = properties.getProperty("userName");
-            passWord = properties.getProperty("passWord");
             //加载驱动
             Class.forName(driver);
         } catch (IOException | ClassNotFoundException e) {
@@ -49,7 +47,7 @@ public class SqlHelper {
         Vector<Object[]> vector = new Vector<Object[]>();
 
         try {
-            connection = DriverManager.getConnection(url, userName, passWord);
+            connection = DriverManager.getConnection(url);
             statement = connection.prepareStatement(sql);
             //给问号赋值
             if(parameters != null) {
@@ -82,13 +80,16 @@ public class SqlHelper {
     public int executeUpdate(String sql, String parameters[]) {
         int isOk = 0;
         try {
-            connection = DriverManager.getConnection(url, userName, passWord);
+            connection = DriverManager.getConnection(url);
             statement = connection.prepareStatement(sql);
             //给问号赋值
             if(parameters != null) {
                 for(int i = 0; i < parameters.length; ++i) {
                     statement.setString(i + 1, parameters[i]);
                 }
+            }
+            if(parameters.length == 8) {
+                statement.setDate(9, new Date(System.currentTimeMillis()));
             }
             isOk = statement.executeUpdate();
         } catch (SQLException e) {
@@ -103,7 +104,7 @@ public class SqlHelper {
     public String[] executeColumn(String sql, String[] parameters) {
         String columnName[] = null;
         try {
-            connection = DriverManager.getConnection(url, userName, passWord);
+            connection = DriverManager.getConnection(url);
             statement = connection.prepareStatement(sql);
             //给问号赋值
             if(parameters != null) {
@@ -133,7 +134,7 @@ public class SqlHelper {
     public Vector<Object> executeTable(String sql, String parameters[]) {
         Vector<Object> vector = new Vector<Object>();
         try {
-            connection = DriverManager.getConnection(url, userName, passWord);
+            connection = DriverManager.getConnection(url);
             statement = connection.prepareStatement(sql);
             //给问号赋值
             if(parameters!=null){

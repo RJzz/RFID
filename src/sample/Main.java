@@ -1,5 +1,6 @@
 package sample;
 
+import Service.RFIDService;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,8 +20,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.RFID;
 
 import java.io.IOException;
+import java.sql.Date;
 
 public class Main extends Application {
 
@@ -82,18 +85,28 @@ public class Main extends Application {
                         s.setScene(scene1);
                         primaryStage.hide();
                         s.show();
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
-
-                    System.out.print("hehe");
                 }
 
             }
         });
         scene.getStylesheets().add(Main.class.getResource("test.css").toExternalForm());
+        Date a = new Date(System.currentTimeMillis());
+        RFID r = new RFID("1", "2", "3", "4", "4", "5", "5");
+        RFID b = new RFID("2", "3", "4", "5", "6", "7", "8");
+        if(new RFIDService().addRFID(r) && new RFIDService().addRFID(b)) {
+            System.out.print("success");
+            if(new RFIDService().deleteRFID(b)) {
+                System.out.print("delete success");
+            }
+        }else {
+            System.out.print("wrong");
+        }
         primaryStage.show();
+
     }
 
 
