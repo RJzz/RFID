@@ -1,0 +1,10 @@
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Label?>
+<BorderPane>
+    <top>
+        <Label text="Page Title"/>
+    </top>
+    <center>
+        <Label text="Some data here"/>
+    </center>
+</BorderPane>
