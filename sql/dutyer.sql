@@ -10,24 +10,25 @@ Target Server Type    : MYSQL
 Target Server Version : 50715
 File Encoding         : 65001
 
-Date: 2016-12-04 09:53:55
+Date: 2016-12-08 19:37:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for duty
+-- Table structure for dutyer
 -- ----------------------------
-DROP TABLE IF EXISTS `duty`;
-CREATE TABLE `duty` (
-  `rDId` char(20) NOT NULL,
+DROP TABLE IF EXISTS `dutyer`;
+CREATE TABLE `dutyer` (
+  `id` smallint(6) NOT NULL,
   `dName` char(10) NOT NULL,
-  `dEmail` char(20) NOT NULL,
-  `dPone` char(15) NOT NULL,
-  PRIMARY KEY (`rDId`),
-  CONSTRAINT `rDId` FOREIGN KEY (`rDId`) REFERENCES `rfid` (`rDId`) ON DELETE CASCADE ON UPDATE CASCADE
+  `dEmail` varchar(20) DEFAULT NULL,
+  `dPhone` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `dName` (`dName`),
+  CONSTRAINT `dName` FOREIGN KEY (`dName`) REFERENCES `rfid` (`rDname`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of duty
+-- Records of dutyer
 -- ----------------------------
