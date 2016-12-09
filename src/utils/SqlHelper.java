@@ -77,7 +77,7 @@ public class SqlHelper {
     }
 
     //增删改函数
-    public int executeUpdate(String sql, String parameters[]) {
+    public int executeUpdate(String sql, String parameters[], Date date) {
         int isOk = 0;
         try {
             connection = DriverManager.getConnection(url);
@@ -88,8 +88,8 @@ public class SqlHelper {
                     statement.setString(i + 1, parameters[i]);
                 }
             }
-            if(parameters.length == 8) {
-                statement.setDate(9, new Date(System.currentTimeMillis()));
+            if(date != null) {
+                statement.setDate(9, date);
             }
             isOk = statement.executeUpdate();
         } catch (SQLException e) {

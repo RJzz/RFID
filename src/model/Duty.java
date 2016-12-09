@@ -1,50 +1,41 @@
 package model;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  * Created by RJzz on 2016/12/3.
  */
 public class Duty {
-    private String dDid;
-    private String dName;
-    private String dEmail;
-    private String dPhone;
-    public Duty(String dDid, String dName, String dEmail, String dPhone) {
-        this.dDid = dDid;
-        this.dName = dName;
-        this.dEmail = dEmail;
-        this.dPhone = dPhone;
-    }
-
-    public void setdDid(String dDid) {
-        this.dDid = dDid;
-    }
-
-    public void setdEmail(String dEmail) {
-        this.dEmail = dEmail;
-    }
-
-    public void setdName(String dName) {
-        this.dName = dName;
-    }
-
-    public void setdPhone(String dPhone) {
-        this.dPhone = dPhone;
-    }
-
-    public String getdDid() {
-        return dDid;
-    }
-
-    public String getdEmail() {
-        return dEmail;
-    }
-
-    public String getdName() {
-        return dName;
+    private final SimpleStringProperty dName;
+    private final SimpleStringProperty dEmail;
+    private final SimpleStringProperty dPhone;
+    public Duty(String dName, String dPhone, String dEmail) {
+        this.dName = new SimpleStringProperty(dName);
+        this.dEmail = new SimpleStringProperty(dEmail);
+        this.dPhone = new SimpleStringProperty(dPhone);
     }
 
     public String getdPhone() {
-        return dPhone;
+        return dPhone.get();
     }
 
+    public String getdName() {
+        return dName.get();
+    }
+
+    public String getdEmail() {
+        return dEmail.get();
+    }
+
+    public void setdPhone(String dPhone) {
+        this.dPhone.set(dPhone);
+    }
+
+    public void setdName(String dName) {
+        this.dName.set(dName);
+    }
+
+    public void setdEmail(String dEmail) {
+        this.dEmail.set(dEmail);
+    }
 }

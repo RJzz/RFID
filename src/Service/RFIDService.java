@@ -21,7 +21,7 @@ public class RFIDService {
                 rfid.getrKId(),
                 rfid.getrDId()
         };
-        if(new SqlHelper().executeUpdate(sql, parameters) == 1) {
+        if(new SqlHelper().executeUpdate(sql, parameters, rfid.getrDate()) == 1) {
             isOK = true;
         }
         return isOK;
@@ -32,7 +32,7 @@ public class RFIDService {
         boolean isOK = false;
         String sql = "delete from rfid where rTag=?";
         String[] parameters = {rfid.getrTag()};
-        if((new SqlHelper().executeUpdate(sql, parameters)) == 1) {
+        if((new SqlHelper().executeUpdate(sql, parameters, rfid.getrDate())) == 1) {
             isOK = true;
         }
         return isOK;
@@ -52,7 +52,7 @@ public class RFIDService {
                 rfid.getrKId(),
                 rfid.getrDId()
         };
-        if(new SqlHelper().executeUpdate(sql, parameters) == 1) {
+        if(new SqlHelper().executeUpdate(sql, parameters, rfid.getrDate()) == 1) {
             isOK = true;
         }
         return isOK;

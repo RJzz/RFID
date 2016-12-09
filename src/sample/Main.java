@@ -64,49 +64,34 @@ public class Main extends Application {
         grid.add(hBox, 1, 4);
         final Text actiontarget = new Text();
         grid.add(actiontarget, 1, 6);
-        Scene scene = new Scene(grid, 300, 275);
+        Scene scene = new Scene(grid, 400, 275);
 
 
         primaryStage.setScene(scene);
-        primaryStage.setTitle("hello wolrd");
+        primaryStage.setTitle("RFID管理系统");
         Button button = new Button("hello world");
         login.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(psBox.getText().equals("admin") && userTestField.getText().equals("admin")) {
-                    actiontarget.setFill(Color.FIREBRICK);
-                    actiontarget.setText("button on clicked");
+                //if(psBox.getText().equals("admin") && userTestField.getText().equals("admin")) {
                     try {
-
-                        Parent root = FXMLLoader.load(getClass().getResource("test.fxml"));
-                        Stage s = new Stage();
-                        s.setTitle("Second");
-                        Scene scene1 = new Scene(root, 100, 100);
-                        s.setScene(scene1);
+                        Parent root = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"));
+                        Stage stage = new Stage();
+                        Scene scene1 = new Scene(root, 800, 600);
+                        //scene1.setCursor(scene.getCursor());
                         primaryStage.hide();
-                        s.show();
+                        stage.setScene(scene1);
+                        stage.show();
 
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }
+                //}
 
             }
         });
-        scene.getStylesheets().add(Main.class.getResource("test.css").toExternalForm());
-        Date a = new Date(System.currentTimeMillis());
-        RFID r = new RFID("1", "2", "3", "4", "4", "5", "5");
-        RFID b = new RFID("2", "3", "4", "5", "6", "7", "8");
-        if(new RFIDService().addRFID(r) && new RFIDService().addRFID(b)) {
-            System.out.print("success");
-            if(new RFIDService().deleteRFID(b)) {
-                System.out.print("delete success");
-            }
-        }else {
-            System.out.print("wrong");
-        }
+        scene.getStylesheets().add(Main.class.getResource("../css/test.css").toExternalForm());
         primaryStage.show();
-
     }
 
 

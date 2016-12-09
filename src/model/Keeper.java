@@ -1,50 +1,45 @@
 package model;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  * Created by RJzz on 2016/12/3.
  */
 public class Keeper {
-    private String kKId;
-    private String kName;
-    private String KEmail;
-    private String kPhone;
-    public Keeper(String id, String name, String email, String phone) {
-        this.kKId = id;
-        this.kName = name;
-        this.KEmail = email;
-        this.kPhone = phone;
-    }
-
-    public String getKEmail() {
-        return KEmail;
-    }
-
-    public String getkKId() {
-        return kKId;
+    private final SimpleStringProperty kName;
+    private final SimpleStringProperty KEmail;
+    private final SimpleStringProperty kPhone;
+    public Keeper(String name, String phone, String email) {
+        this.kName = new SimpleStringProperty(name);
+        this.KEmail = new SimpleStringProperty(email);
+        this.kPhone = new SimpleStringProperty(phone);
     }
 
     public String getkName() {
-        return kName;
+        return kName.get();
+    }
+
+
+
+    public void setkName(String kName) {
+        this.kName.set(kName);
     }
 
     public String getkPhone() {
-        return kPhone;
+        return kPhone.get();
     }
 
-    public void setKEmail(String KEmail) {
-        this.KEmail = KEmail;
-    }
-
-    public void setkKId(String kKId) {
-        this.kKId = kKId;
-    }
-
-    public void setkName(String kName) {
-        this.kName = kName;
+    public String getKEmail() {
+        return KEmail.get();
     }
 
     public void setkPhone(String kPhone) {
-        this.kPhone = kPhone;
+        this.kPhone.set(kPhone);
     }
+
+    public void setKEmail(String KEmail) {
+        this.KEmail.set(KEmail);
+    }
+
 }
 
