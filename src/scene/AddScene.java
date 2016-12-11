@@ -19,11 +19,11 @@ public class AddScene extends Scene {
     public static AddScene addScene;
 
     public static AddScene getInstance() {
-        if(addScene != null) {
+        if (addScene != null) {
             return addScene;
-        }else {
+        } else {
 
-        return addScene;
+            return addScene;
 
         }
     }

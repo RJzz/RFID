@@ -5,6 +5,7 @@ import Service.KeeperService;
 import Service.RFIDService;
 import com.mysql.fabric.xmlrpc.base.Data;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -14,15 +15,17 @@ import model.RFID;
 import scene.AddScene;
 import stage.AddStage;
 
+import java.net.URL;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ResourceBundle;
 import java.util.logging.SimpleFormatter;
 
 /**
  * Created by RJzz on 2016/12/8.
  */
-public class AddController {
+public class AddController{
     @FXML private TextField rTag;
     @FXML private TextField rName;
     @FXML private TextField rId;
@@ -62,11 +65,15 @@ public class AddController {
                         rType.getText(), rPosition.getText(), rKname.getText(), rDname.getText(), rDate.getEditor().getText());
                 Keeper keeper = new Keeper(rKname.getText(), kEmail.getText(), kPhone.getText());
                 Duty duty = new Duty(rDname.getText(), dEmail.getText(), dPhone.getText());
+                rfid.setDuty(duty);
+                rfid.setKeeper(keeper);
                 if (new RFIDService().addRFID(rfid)) {
                     if(new DutyService().addDuty(duty) && new KeeperService().addKeeper(keeper)) {
+                        info.setText("     添加成功");
                         System.out.print("插入结束，成功\n");
                     }
                 } else {
+                    info.setText("     添加失败");
                     System.out.print("插入失败");
                 }
             } catch (ParseException e) {
@@ -83,4 +90,6 @@ public class AddController {
     public static RFID getRfid() {
         return rfid;
     }
+
+
 }

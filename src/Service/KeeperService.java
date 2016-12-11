@@ -17,7 +17,7 @@ public class KeeperService {
                 keeper.getkPhone(),
                 keeper.getKEmail()
         };
-        if(new SqlHelper().executeUpdate(sql, parameters, null) == 1) {
+        if(new SqlHelper().executeUpdate(sql, parameters, null, 0) == 1) {
             isOk = true;
             System.out.println("插入Keeper表成功");
         }
@@ -34,7 +34,7 @@ public class KeeperService {
                 keeper.getKEmail(),
                 keeper.getkPhone()
         };
-        if (new SqlHelper().executeUpdate(sql, parameters, null) == 1) {
+        if (new SqlHelper().executeUpdate(sql, parameters, null, 2) == 1) {
             isOK = true;
             System.out.print("修改keeper成功");
         }

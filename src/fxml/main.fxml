@@ -112,6 +112,7 @@
             <Button onAction="#findAllRFID" text="显示所有设备"/>
             <Button onAction="#addRFID" text="添加设备" />
             <Button onAction="#searchRFID" text="查找设备" />
+            <Button onAction="#updateRFID" text="修改设备"/>
             <Button onAction="#deleteRFID" text="删除设备" />
         </HBox>
 

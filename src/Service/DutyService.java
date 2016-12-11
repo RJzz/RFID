@@ -18,7 +18,7 @@ public class DutyService {
                 duty.getdEmail(),
                 duty.getdPhone()
         };
-        if (new SqlHelper().executeUpdate(sql, parameters, null) == 1) {
+        if (new SqlHelper().executeUpdate(sql, parameters, null, 2) == 1) {
             isOk = true;
             System.out.println("插入责任人成功");
         }
@@ -28,14 +28,14 @@ public class DutyService {
     //修改责任人
     public boolean updateDuty(Duty duty) {
         boolean isOK = false;
-        String sql = "update dutyer set dName=?, dEmail=?, dPhone";
+        String sql = "update dutyer set dPone=?, dEmail=?, dPhone";
         String parameters[] = {
                 null,
                 duty.getdName(),
                 duty.getdEmail(),
                 duty.getdPhone()
         };
-        if(new SqlHelper().executeUpdate(sql, parameters, null) == 1) {
+        if(new SqlHelper().executeUpdate(sql, parameters, null, 2) == 1) {
             isOK = true;
             System.out.println("修改责任人成功");
         }

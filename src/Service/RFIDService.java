@@ -21,7 +21,7 @@ public class RFIDService {
                 rfid.getKid(),
                 rfid.getDid()
         };
-        if(new SqlHelper().executeUpdate(sql, parameters, rfid.getrDate()) == 1) {
+        if(new SqlHelper().executeUpdate(sql, parameters, rfid.getrDate(), 0) == 1) {
             isOK = true;
             System.out.print("插入设备成功\n");
         }
@@ -33,7 +33,7 @@ public class RFIDService {
         boolean isOK = false;
         String sql = "delete from rfid where rTag=?";
         String[] parameters = {rfid.getTag()};
-        if((new SqlHelper().executeUpdate(sql, parameters, null)) == 1) {
+        if((new SqlHelper().executeUpdate(sql, parameters, null, 1)) == 1) {
             isOK = true;
             System.out.println("删除设备成功");
         }
@@ -43,18 +43,18 @@ public class RFIDService {
     //修改设备
     public boolean updateRFID(RFID rfid) {
         boolean isOK = false;
-        String sql = "update rfid set rTag=?, rName=?, rId=?, rType=?, rPosition=?, rKId=?, rDId=?, rDate=?";
+        String sql = "update rfid set rName=?, rId=?, rType=?, rPosition=?, rKname=?, rDname=?, rDate=? where rTag=?";
         String[] parameters = {
-                null,
-                rfid.getTag(),
                 rfid.getName(),
                 rfid.getId(),
                 rfid.getPosition(),
                 rfid.getType(),
                 rfid.getKid(),
-                rfid.getDid()
+                rfid.getDid(),
+                rfid.getDataString(),
+                rfid.getTag(),
         };
-        if(new SqlHelper().executeUpdate(sql, parameters, rfid.getrDate()) == 1) {
+        if(new SqlHelper().executeUpdate(sql, parameters, rfid.getrDate(), 2) == 1) {
             isOK = true;
             System.out.println("修改设备成功");
         }

@@ -6,13 +6,16 @@ import javafx.beans.property.SimpleStringProperty;
  * Created by RJzz on 2016/12/3.
  */
 public class Keeper {
-    private final SimpleStringProperty kName;
-    private final SimpleStringProperty KEmail;
-    private final SimpleStringProperty kPhone;
+    private final SimpleStringProperty kName = new SimpleStringProperty("");
+    private final SimpleStringProperty KEmail = new SimpleStringProperty("");
+    private final SimpleStringProperty kPhone = new SimpleStringProperty("");
     public Keeper(String name, String email, String phone) {
-        this.kName = new SimpleStringProperty(name);
-        this.KEmail = new SimpleStringProperty(email);
-        this.kPhone = new SimpleStringProperty(phone);
+        this.kName.set(name);
+        this.KEmail.set(email);
+        this.kPhone.set(phone);
+    }
+    public Keeper() {
+
     }
 
     public String getkName() {

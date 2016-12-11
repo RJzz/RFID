@@ -21,6 +21,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import model.RFID;
 import stage.MainStage;
 
@@ -64,6 +65,8 @@ public class Main extends Application {
         grid.add(hBox, 1, 4);
         final Text actiontarget = new Text();
         grid.add(actiontarget, 1, 6);
+        Text info = new Text("");
+        grid.add(info, 1, 7);
         Scene scene = new Scene(grid, 400, 275);
 
 
@@ -73,9 +76,9 @@ public class Main extends Application {
         login.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //if(psBox.getText().equals("admin") && userTestField.getText().equals("admin")) {
+                if(psBox.getText().equals("admin") && userTestField.getText().equals("admin")) {
                     try {
-                        Pane myPane = (Pane)FXMLLoader.load(getClass().getResource("../fxml/main.fxml"));
+                        Pane myPane = (Pane) FXMLLoader.load(getClass().getResource("../fxml/main.fxml"));
                         //Parent root = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"));
 
                         Scene scene1 = new Scene(myPane);
@@ -84,21 +87,24 @@ public class Main extends Application {
                         primaryStage.hide();
                         MainStage.getInstance().setScene(scene1);
                         MainStage.getInstance().show();
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                //}
+                }else {
+                    info.setText("用户名或密码错误");
+                }
 
             }
         });
         scene.getStylesheets().add(Main.class.getResource("../css/test.css").toExternalForm());
         primaryStage.show();
+
     }
 
 
 
     public static void main(String[] args) {
         launch(args);
+
     }
 }

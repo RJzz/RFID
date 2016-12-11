@@ -62,7 +62,7 @@ public class SqlHelper {
             //得到共有多少列
             metaData = resultSet.getMetaData();
             int column = metaData.getColumnCount();
-            System.out.println("共有多少列" + column);
+           // System.out.println("共有多少列" + column);
             //循环取出数据
             while(resultSet.next()) {
                 Object[] objects = new Object[column - 1];
@@ -80,21 +80,49 @@ public class SqlHelper {
         return vector;
     }
 
-    //增删改函数
-    public int executeUpdate(String sql, String parameters[], Date date) {
+    //增删改函数type = 0为增加，1为删除，2为修改
+    public int executeUpdate(String sql, String parameters[], Date date, int type) {
         int isOk = 0;
         try {
             connection = DriverManager.getConnection(url);
             statement = connection.prepareStatement(sql);
-            //给问号赋值
-            if(parameters != null) {
-                for(int i = 0; i < parameters.length; ++i) {
-                    statement.setString(i + 1, parameters[i]);
-                }
+
+            switch (type) {
+                case 0:
+                    //给问号赋值
+                    if(parameters != null) {
+                        for(int i = 0; i < parameters.length; ++i) {
+                            statement.setString(i + 1, parameters[i]);
+                        }
+                    }
+                    if(date != null) {
+                        statement.setDate(9, date);
+                    }
+                    break;
+                case 1:
+                    //给问号赋值
+                    if(parameters != null) {
+                        for(int i = 0; i < parameters.length; ++i) {
+                            statement.setString(i + 1, parameters[i]);
+                        }
+                    }
+
+                    break;
+                case 2:
+                    //给问号赋值
+                    if(parameters != null) {
+                        for(int i = 0; i < parameters.length; ++i) {
+                            statement.setString(i + 1, parameters[i]);
+                        }
+                    }
+                    if(date != null) {
+                        statement.setDate(7, date);
+                    }
+                    break;
+                default:
+                    break;
             }
-            if(date != null) {
-                statement.setDate(9, date);
-            }
+
             isOk = statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

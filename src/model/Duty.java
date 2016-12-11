@@ -6,13 +6,16 @@ import javafx.beans.property.SimpleStringProperty;
  * Created by RJzz on 2016/12/3.
  */
 public class Duty {
-    private final SimpleStringProperty dName;
-    private final SimpleStringProperty dEmail;
-    private final SimpleStringProperty dPhone;
+    private final SimpleStringProperty dName = new SimpleStringProperty("");
+    private final SimpleStringProperty dEmail = new SimpleStringProperty("");
+    private final SimpleStringProperty dPhone = new SimpleStringProperty("");
     public Duty(String dName, String dEmail, String dPhone) {
-        this.dName = new SimpleStringProperty(dName);
-        this.dEmail = new SimpleStringProperty(dEmail);
-        this.dPhone = new SimpleStringProperty(dPhone);
+        this.dName.set(dName);
+        this.dEmail.set(dEmail);
+        this.dPhone.set(dPhone);
+    }
+    public Duty() {
+
     }
 
     public String getdPhone() {
