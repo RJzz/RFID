@@ -213,6 +213,7 @@ public class MainController implements Initializable{
                     ObservableList<RFID> rfidObservableList = tableView.getItems();
                     rfidObservableList.clear();
                     rfidObservableList.addAll(SearchController.getSerach());
+                    info.setText("");
                 }
             }
         });
@@ -238,6 +239,12 @@ public class MainController implements Initializable{
             UpdateStage.getInstance().setScene(scene);
             UpdateStage.getInstance().setTitle("修改设备");
             UpdateStage.getInstance().show();
+            UpdateStage.getInstance().setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    info.setText("");
+                }
+            });
         }
     }
 
