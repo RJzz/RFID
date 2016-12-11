@@ -15,12 +15,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.RFID;
+import stage.MainStage;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -29,8 +31,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-//        primaryStitle("Hello World");
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
@@ -75,13 +75,15 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 //if(psBox.getText().equals("admin") && userTestField.getText().equals("admin")) {
                     try {
-                        Parent root = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"));
-                        Stage stage = new Stage();
-                        Scene scene1 = new Scene(root, 800, 600);
+                        Pane myPane = (Pane)FXMLLoader.load(getClass().getResource("../fxml/main.fxml"));
+                        //Parent root = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"));
+
+                        Scene scene1 = new Scene(myPane);
+                        scene1.getStylesheets().add(Main.class.getResource("../css/test.css").toExternalForm());
                         //scene1.setCursor(scene.getCursor());
                         primaryStage.hide();
-                        stage.setScene(scene1);
-                        stage.show();
+                        MainStage.getInstance().setScene(scene1);
+                        MainStage.getInstance().show();
 
                     } catch (IOException e) {
                         e.printStackTrace();

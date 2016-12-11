@@ -12,67 +12,108 @@
 
 <?import sample.FormattedTableCellFactory?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
-    <top>
-        <Label style="-fx-font: NORMAL 20 Tahoma;" text="RFID管理系统" BorderPane.alignment="CENTER_LEFT" />
-    </top>
+<?import javafx.collections.FXCollections?>
+<?import model.RFID?>
+<?import javafx.scene.text.Text?>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+
+    <Label style="-fx-font: NORMAL 20 Tahoma;" text="RFID管理系统" GridPane.columnIndex="0" GridPane.rowIndex="0" />
     <padding>
         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </padding>
 
-    <center>
-        <TableView fx:id="tableView" BorderPane.alignment="CENTER">
-            <columns>
-                <TableColumn fx:id="rTag" prefWidth="80.0" text="标签号">
-                    <cellFactory>
-                        <FormattedTableCellFactory alignment="CENTER" />
-                    </cellFactory>
-                    <cellValueFactory>
-                        <PropertyValueFactory property="firstName" />
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn prefWidth="100.0" text="设备名称">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="lastName" />
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn prefWidth="80.0" text="设备号">
-                </TableColumn>
-            </columns>
-            <columns>
-                <TableColumn prefWidth="100.0" text="设备类型" />
-            </columns>
-            <columns>
-                <TableColumn prefWidth="100.0" text="存放地点" />
-            </columns>
-            <columns>
-                <TableColumn prefWidth="80.0" text="保管人">
-                    <columns>
-                    </columns>
-                </TableColumn>
-            </columns>
-            <columns>
-                <TableColumn prefWidth="80.0" text="责任人" />
-            </columns>
-            <columns>
-                <TableColumn prefWidth="100.0" text="购买时间" />
-            </columns>
-            <!--<sortOrder>
-                <fx:reference source="firstNameColumn" />
-            </sortOrder>-->
-        </TableView>
+    <TableView fx:id="tableView" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <columns>
+            <TableColumn fx:id="rTag" prefWidth="100.0" text="标签号">
+                <cellFactory>
+                    <FormattedTableCellFactory alignment="CENTER" />
+                </cellFactory>
+                <cellValueFactory>
+                    <PropertyValueFactory property="tag"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="60.0" text="设备名称" fx:id="rName">
+                <cellFactory>
+                    <FormattedTableCellFactory alignment="CENTER" />
+                </cellFactory>
+                <cellValueFactory>
+                    <PropertyValueFactory property="name"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="rId" prefWidth="100.0" text="设备号">
+                <cellFactory>
+                    <FormattedTableCellFactory alignment="CENTER" />
+                </cellFactory>
+                <cellValueFactory>
+                    <PropertyValueFactory property="id"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="60.0" text="设备类型" fx:id="rType">
+                <cellFactory>
+                    <FormattedTableCellFactory alignment="CENTER" />
+                </cellFactory>
+                <cellValueFactory>
+                    <PropertyValueFactory property="type"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="100.0" text="存放地点" fx:id="rPosition">
+                <cellFactory>
+                    <FormattedTableCellFactory alignment="CENTER" />
+                </cellFactory>
+                <cellValueFactory>
+                    <PropertyValueFactory property="position"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="100.0" text="保管人" fx:id="keeper">
+                <cellFactory>
+                    <FormattedTableCellFactory alignment="CENTER" />
+                </cellFactory>
+                <cellValueFactory>
+                    <PropertyValueFactory property="kid"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="100.0" text="责任人" fx:id="dutyer">
+                <cellFactory>
+                    <FormattedTableCellFactory alignment="CENTER" />
+                </cellFactory>
+                <cellValueFactory>
+                    <PropertyValueFactory property="did"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="100.0" text="购买时间" fx:id="rDate">
+                <cellFactory>
+                    <FormattedTableCellFactory alignment="CENTER" />
+                </cellFactory>
+                <cellValueFactory>
+                    <PropertyValueFactory property="dataString"/>
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+        <!--<items>-->
+            <!--<FXCollections fx:factory="observableArrayList">-->
+                <!--<RFID tag="1" type="1" did="1" name="1" kid="1" position="1" id="1" dataString="2014-11-11"/>-->
+            <!--</FXCollections>-->
+        <!--</items>-->
+    </TableView>
 
-    </center>
     <padding>
         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </padding>
-    <bottom>
-        <HBox alignment="BOTTOM_CENTER" spacing="40.0">
+    <HBox alignment="BOTTOM_CENTER" spacing="30.0" GridPane.columnIndex="0" GridPane.rowIndex="2" >
+        <Text/>
+    </HBox>
+    <HBox alignment="BOTTOM_CENTER" spacing="30.0" GridPane.columnIndex="0" GridPane.rowIndex="3" >
+        <Text fx:id="info" fill="crimson"/>
+    </HBox>
+    <HBox alignment="BOTTOM_CENTER" spacing="30.0" GridPane.columnIndex="0" GridPane.rowIndex="2" >
+        <Text/>
+    </HBox>
+        <HBox alignment="BOTTOM_CENTER" spacing="30.0" GridPane.columnIndex="0" GridPane.rowIndex="4" >
+            <Button onAction="#findAllRFID" text="显示所有设备"/>
             <Button onAction="#addRFID" text="添加设备" />
-            <Button onAction="#addRFID" text="查找设备" />
-            <Button onAction="#addRFID" text="删除设备" />
-            <Button onAction="#addRFID" text="退出系统" />
+            <Button onAction="#searchRFID" text="查找设备" />
+            <Button onAction="#deleteRFID" text="删除设备" />
         </HBox>
-    </bottom>
 
-</BorderPane>
+
+</GridPane>

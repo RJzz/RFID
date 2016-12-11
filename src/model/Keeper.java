@@ -9,7 +9,7 @@ public class Keeper {
     private final SimpleStringProperty kName;
     private final SimpleStringProperty KEmail;
     private final SimpleStringProperty kPhone;
-    public Keeper(String name, String phone, String email) {
+    public Keeper(String name, String email, String phone) {
         this.kName = new SimpleStringProperty(name);
         this.KEmail = new SimpleStringProperty(email);
         this.kPhone = new SimpleStringProperty(phone);

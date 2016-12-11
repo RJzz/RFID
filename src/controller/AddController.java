@@ -1,5 +1,7 @@
 package controller;
 
+import Service.DutyService;
+import Service.KeeperService;
 import Service.RFIDService;
 import com.mysql.fabric.xmlrpc.base.Data;
 import javafx.fxml.FXML;
@@ -35,8 +37,8 @@ public class AddController {
     @FXML private TextField dPhone;
     @FXML private TextField dEmail;
     @FXML private Text info;
-    public void test() {
-    }
+    public static RFID rfid = null;
+
     @FXML
     protected void addConfirm() {
         //添加数据，首先检查数据是否符合规范
@@ -50,27 +52,22 @@ public class AddController {
                 dPhone.getText().equals("")
                 ){
             info.setText("请按要求填写");
-
-
-
-
             System.out.print("添加设备未满足规范性要求");
         }else {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             try {
                 java.util.Date b = sdf.parse(rDate.getEditor().getText());
                 Date date = new Date(b.getTime());
-                RFID rfid = new RFID(rTag.getText(), rName.getText(), rId.getText(),
-                        rType.getText(), rPosition.getText(), rKname.getText(), rDname.getText(), date);
-                Keeper keeper = new Keeper(rKname.getText(), kPhone.getText(), kEmail.getText());
-                Duty duty = new Duty(rDname.getText(), dPhone.getText(), dEmail.getText());
+                rfid = new RFID(rTag.getText(), rName.getText(), rId.getText(),
+                        rType.getText(), rPosition.getText(), rKname.getText(), rDname.getText(), rDate.getEditor().getText());
+                Keeper keeper = new Keeper(rKname.getText(), kEmail.getText(), kPhone.getText());
+                Duty duty = new Duty(rDname.getText(), dEmail.getText(), dPhone.getText());
                 if (new RFIDService().addRFID(rfid)) {
-                    System.out.print("success");
-                    //if (new RFIDService().deleteRFID(rfid)) {
-                        //System.out.print("delete success");
-                   // }
+                    if(new DutyService().addDuty(duty) && new KeeperService().addKeeper(keeper)) {
+                        System.out.print("插入结束，成功\n");
+                    }
                 } else {
-                    System.out.print("wrong");
+                    System.out.print("插入失败");
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -81,5 +78,9 @@ public class AddController {
     @FXML
     protected void addCancel() {
         AddStage.getInstance().close();
+    }
+
+    public static RFID getRfid() {
+        return rfid;
     }
 }

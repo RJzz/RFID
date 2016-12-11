@@ -9,7 +9,7 @@ public class Duty {
     private final SimpleStringProperty dName;
     private final SimpleStringProperty dEmail;
     private final SimpleStringProperty dPhone;
-    public Duty(String dName, String dPhone, String dEmail) {
+    public Duty(String dName, String dEmail, String dPhone) {
         this.dName = new SimpleStringProperty(dName);
         this.dEmail = new SimpleStringProperty(dEmail);
         this.dPhone = new SimpleStringProperty(dPhone);

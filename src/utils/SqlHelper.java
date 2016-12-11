@@ -43,7 +43,7 @@ public class SqlHelper {
     }
 
     //查询函数
-    public Vector<Object[]> executeQuery(String sql, String[] parameters) {
+    public Vector<Object[]> executeQuery(String sql, String[] parameters, Date date) {
         Vector<Object[]> vector = new Vector<Object[]>();
 
         try {
@@ -55,17 +55,21 @@ public class SqlHelper {
                     statement.setString(i + 1, parameters[i]);
                 }
             }
+            if(date != null) {
+                statement.setDate(9, date);
+            }
             resultSet = statement.executeQuery();
             //得到共有多少列
             metaData = resultSet.getMetaData();
             int column = metaData.getColumnCount();
-
+            System.out.println("共有多少列" + column);
             //循环取出数据
             while(resultSet.next()) {
-                Object[] objects = new Object[column];
+                Object[] objects = new Object[column - 1];
                 for(int i = 0; i < objects.length; ++i) {
-                    objects[i] = resultSet.getObject(i);
+                    objects[i] = resultSet.getObject(i + 2);
                 }
+                vector.add(objects);
             }
 
         } catch (SQLException e) {
@@ -149,7 +153,6 @@ public class SqlHelper {
             while(resultSet.next()){
                 //临时集合
                 Vector<String> temp = new Vector<String>();
-
                 for(int i = 0; i < metaData.getColumnCount() ; ++i){
                     //把每列的数据加入临时集合
                     temp.add(resultSet.getString(i+1));
