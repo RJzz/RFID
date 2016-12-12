@@ -152,7 +152,7 @@ public class MainController implements Initializable{
             Vector<Object[]> objectd = new SqlHelper().executeQuery(sqlk, parameterd, null);
             Vector<Duty> dutyer = new Vector<>();
             Duty duty = new Duty();
-            for(int k = 0; k < objectk.size(); ++k) {
+            for(int k = 0; k < objectd.size(); ++k) {
                 Object[] objectds = objectd.get(k);
                 duty.setdName(objectds[0].toString());
                 duty.setdEmail(objectds[1].toString());
